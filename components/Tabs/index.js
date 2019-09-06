@@ -13,7 +13,7 @@ axios.get('https://lambda-times-backend.herokuapp.com/topics')
     console.log(response);
     const newTab = CreateTab(response.data);
 
-    const entryPoint = document.querySelector('.tabs')
+    const entryPoint = document.querySelector('.topics')
     entryPoint.appendChild(newTab);
   })
   .catch(error => {
@@ -29,8 +29,6 @@ axios.get('https://lambda-times-backend.herokuapp.com/topics')
       return myTab
   }
 
+  console.log(CreateTab())
   const topicsContainer = document.createElement('div')
 
-  topicsContainer.classList.add("topics")
-  
-  topicsContainer.appendChild(CreateTab())

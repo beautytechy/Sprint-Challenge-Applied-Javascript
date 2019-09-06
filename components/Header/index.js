@@ -24,13 +24,26 @@ function Header() {
     currentTemp.classList.add("temp")
 
     mainTitle.textContent = "Lambda Times"
+    pubDate.textContent = "SMARCH 28, 2019"
+    currentTemp.textContent = "98°"
 
     return newHeader;
 
 }
 
+
+const headerContainer = document.querySelector('.header-container')
+
+const myHeader = Header();
+
+
+
+headerContainer.setAttribute('div', myHeader)
+
 console.log(Header());
 
-const headerContainer = document.createElement('div')
-headerContainer.appendChild(Header());
+const topBar = document.querySelector(".top-bar")
+
+topBar.appendChild(myHeader);
+
 
