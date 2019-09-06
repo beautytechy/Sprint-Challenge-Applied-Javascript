@@ -9,26 +9,30 @@
 //    <div class="tab">topic here</div>
 
 axios.get('https://lambda-times-backend.herokuapp.com/topics')
-  .then(response => {
-    console.log(response);
-    const newTab = CreateTab(response.data);
+.then(response => {
+  console.log(response);
+  
+  response.data.topics.forEach(item => {
+    const newTab = CreateTab();
+    newTab.textContent = item
 
     const entryPoint = document.querySelector('.topics')
     entryPoint.appendChild(newTab);
-  })
-  .catch(error => {
-    console.log("The data was not returned", error);
   });
+}).catch(error => {
+  console.log("The data was not returned", error);
+});
 
+  function CreateTab (data) {
+      const myTab = document.createElement('div');
 
-  function CreateTab () {
-      const myTab = document.querySelector('div');
+      myTab.classList.add('tab')
 
-      myTab.classList.add("tab")
 
       return myTab
   }
 
   console.log(CreateTab())
-  const topicsContainer = document.createElement('div')
+
+
 

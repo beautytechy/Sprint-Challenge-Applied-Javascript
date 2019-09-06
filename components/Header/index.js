@@ -37,13 +37,6 @@ const headerContainer = document.querySelector('.header-container')
 const myHeader = Header();
 
 
-
-headerContainer.setAttribute('div', myHeader)
-
 console.log(Header());
 
-const topBar = document.querySelector(".top-bar")
-
-topBar.appendChild(myHeader);
-
-
+headerContainer.appendChild(myHeader);
