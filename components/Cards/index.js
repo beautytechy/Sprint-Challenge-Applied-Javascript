@@ -43,11 +43,11 @@ function CreateCard(item) {
     headline.classList.add('headline')
     author.classList.add('author')
     imgContainer.classList.add('img-container')
-    articleImage.src = item[0].authorPhoto
-
+    // articleImage.src = item[0].authorPhoto
     headline.textContent = item[0].headline
-
     byLine.textContent = `By ${item[0].authorName}`
+    articleImage.setAttribute('src', item[0].authorPhoto)
+
 
     return mainCard
 
@@ -57,24 +57,27 @@ axios.get('https://lambda-times-backend.herokuapp.com/articles').then(response =
     console.log(response);
 
     const articleData = Object.values(response.data.articles);
-console.log(articleData);
+    console.log(articleData);
 
     articleData.map(item => {
         console.log(item)
 
-        let newCard = CreateCard(item);
+        const newCard = CreateCard(item);
 
-        for (i = 0; i < articleData.length; i++) {
+        // for (i = 0; i < item.length; i++) {
 
-            let newCard = CreateCard(item)
 
-            const entryPoint = document.querySelector('.cards-container')
-            entryPoint.appendChild(newCard);
-        }
+        const entryPoint = document.querySelector('.cards-container')
+        entryPoint.appendChild(newCard);
+
+
+        // }
+
         return newCard
+
     });
 
-})
-    .catch(error => {
-        console.log("The data was not returned", error);
-    });
+}).catch(error => {
+    console.log("The data was not returned", error);
+});
+
