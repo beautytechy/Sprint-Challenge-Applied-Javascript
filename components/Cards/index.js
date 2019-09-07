@@ -33,7 +33,7 @@ function CreateCard(item) {
     //Structure
     mainCard.appendChild(headline)
     mainCard.appendChild(author)
-    mainCard.appendChild(imgContainer)
+    author.appendChild(imgContainer)
     imgContainer.appendChild(articleImage)
     mainCard.appendChild(byLine)
 
@@ -43,41 +43,32 @@ function CreateCard(item) {
     headline.classList.add('headline')
     author.classList.add('author')
     imgContainer.classList.add('img-container')
-    // articleImage.src = item[0].authorPhoto
-    headline.textContent = item[0].headline
-    byLine.textContent = `By ${item[0].authorName}`
-    articleImage.setAttribute('src', item[0].authorPhoto)
+    articleImage.src = item.authorPhoto
 
+    headline.textContent = item["headline"]
+    byLine.textContent = `By ${item.authorName}`
 
     return mainCard
 
 }
+const entryPoint = document.querySelector('.cards-container')
 
 axios.get('https://lambda-times-backend.herokuapp.com/articles').then(response => {
     console.log(response);
 
-    const articleData = Object.values(response.data.articles);
-    console.log(articleData);
+    const articleData = response.data.articles;
 
-    articleData.map(item => {
-        console.log(item)
+    for (let key in articleData) {
+        console.log(key)
+        articleData[key].forEach(item => {
+            console.log(item)
+            const newCard = CreateCard(item);
+            entryPoint.appendChild(newCard);
+        })
+    }
+    return newCard
 
-        const newCard = CreateCard(item);
-
-        // for (i = 0; i < item.length; i++) {
-
-
-        const entryPoint = document.querySelector('.cards-container')
-        entryPoint.appendChild(newCard);
-
-
-        // }
-
-        return newCard
-
-    });
-
-}).catch(error => {
+}).catch (error => {
     console.log("The data was not returned", error);
 });
 
